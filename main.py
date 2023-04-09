@@ -467,9 +467,9 @@ def volume_control():
         # Get hand landmark prediction
         result = hands.process(framergb)
 
-        currentVolume_100 = 'Volume Control'
-
         currentVolume = volume.GetMasterVolumeLevel()
+        
+        currentVolume_100 = 'Volume : ' + str(round(volume.GetMasterVolumeLevelScalar()*100)) + '%'
 
         # post process the result
         if result.multi_hand_landmarks:
@@ -498,13 +498,13 @@ def volume_control():
 
                 if length > 140:
                     volume.SetMasterVolumeLevel(currentVolume + 0.14, None)                    
-                    currentVolume_100 = '      ' + str(round(volume.GetMasterVolumeLevelScalar()*100)) + '%'
+                    currentVolume_100 = 'Volume : ' + str(round(volume.GetMasterVolumeLevelScalar()*100)) + '%'
                     if count> -30:
                         count -= 1
                     
                 elif length>60:                  
                     volume.SetMasterVolumeLevel(currentVolume - 0.18, None)
-                    currentVolume_100 = '      ' + str(round(volume.GetMasterVolumeLevelScalar()*100)) + '%'
+                    currentVolume_100 = 'Volume : ' + str(round(volume.GetMasterVolumeLevelScalar()*100)) + '%'
                     if count> -30:
                         count -= 1
 
@@ -549,7 +549,7 @@ slideshow_controls = f.read().split('\n')
 f.close()
 
 
-available_controls = ['Open/Connect PowerPoint' , 'Open/Connect Word' , 'Stop Program' , 'Begin Slideshow' , 'Print' , 'Save As' , 'Close PowerPoint' , 'Close Word' , 'Back to Main Menu' , 'Open Pinned Presentation' , 'Open Pinned Document' , 'Switch to PowerPoint' , 'Switch to Word', 'End Slideshow' , 'Next Slide' , 'Previous Slide']
+available_controls = ['Open/Connect PowerPoint' , 'Open/Connect Word' , 'Open Volume Control' , 'Stop Program' , 'Begin Slideshow' , 'Print' , 'Save As' , 'Close PowerPoint' , 'Close Word' , 'Back to Main Menu' , 'Open Pinned Presentation' , 'Open Pinned Document' , 'Switch to PowerPoint' , 'Switch to Word', 'End Slideshow' , 'Next Slide' , 'Previous Slide']
 
 ppt_app_active = False
 doc_app_active = False
